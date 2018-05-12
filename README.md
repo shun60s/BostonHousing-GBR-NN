@@ -18,25 +18,27 @@ python GBR.py
 ### 結果  
 
 下図は、テストデータの予測誤差の平均と、予測から大きく外れたワースト10のリスト、各指標の(相対的な）重要度である。
-![sample1](docs/GBR1.png) 
+![sample1](docs/GBR1.png)  
+  
 誤差の平均値は小さくても、大きく外したケースも存在している。  
 また、ニューラルネットワークと違い、住宅価格を予測するために使った指標（入力）の（相対的な）重要度の情報も得られる。  
 
 ちなみに、相関関係を探るため、それぞれの指標と住宅価格の値をプロットすると以下のようになる。  
 LSTAT: 低所得者の割合  
-![sample2](docs/LSTAT.png) 
+![sample2](docs/LSTAT.png)  
 
 
 RM: 1戸あたりの平均部屋数  
-![sample3](docs/RM.png) 
+![sample3](docs/RM.png)  
 
 
 DIS: ボストンの主な5つの雇用圏までの重み付き距離  
-![sample4](docs/DIS.png) 
+![sample4](docs/DIS.png)  
 
 
-INDUS: 非小売業の土地面積の割合（人口単位） 
-![sample5](docs/INDUS.png) 
+INDUS: 非小売業の土地面積の割合（人口単位）  
+![sample5](docs/INDUS.png)  
+  
 ここまでくると相関はよくわからない。  
   
 
@@ -55,7 +57,7 @@ tree0 は１番目の推定器(estimator)、tree498 は500番目の推定器(estimator)を示す。
 　　
 
 
-下図は、いろいろな手法による分類の境界線の例であるが、決定木(decision tree)はYes/No判定なので（曲線ではなく）離散的な境界となる。 
+下図は、いろいろな手法による分類の境界線の例であるが、決定木(decision tree)はYes/No判定なので（曲線ではなく）離散的な境界となる。  
 ![sample8](docs/border_line.png)  
 
   
@@ -63,13 +65,13 @@ tree0 は１番目の推定器(estimator)、tree498 は500番目の推定器(estimator)を示す。
 
 ### 動作方法  
 
-NN構成はFCの4層で、フレームワークとしてはkerasとtensorflowを使用した。  
+ニューラルネットワークの構成は4層のFCで、フレームワークとしてはkerasとtensorflowを使用した。  
 ```
 python keras.py
 ```
 引数オプションとして、エポック数(-e )、ユニット数(-u )、バッチサイズ(-b )も指定できる。  
 
-下図は、学習時の損失と予測誤差の平均の様子である。  
+下図は、学習時の損失(loss)と予測誤差の平均(mae)の様子である。  
 ![sample6](docs/Figure_1_keras.png)  
   
 
