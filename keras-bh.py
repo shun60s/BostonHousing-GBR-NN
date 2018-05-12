@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 """
-NNによるボストンハウスのデータ(13種類の指標と住宅価格のデータ）の予測
+NN(ニューラルネットワーク)によるボストンハウスのデータ(13種類の指標と住宅価格のデータ）の予測
 NNのフレームワークとしてはkerasとtensorflowを使用。
 
 ----------------------------------------------------------------------------
@@ -91,9 +91,10 @@ if __name__ == '__main__':
     print("")
     # 予測誤差が大きいWorst 10を表示する
     index0= np.argsort( np.abs(test_targets - Y_predict))[::-1]
-    print ('Worst 10: actual, estimation, difference')
+    print ('Worst 10:')
+    print ('actual, estimation, difference')
     for i in index0[0:10]:
-        print(test_targets[i], "%.4f" % Y_predict[i], "%.4f" % (test_targets[i]- Y_predict[i]) )
+        print(test_targets[i], "%.4f" % Y_predict[i], "%.4f" % (Y_predict[i] - test_targets[i]) )
     
     # 学習時の損失と評価mae(mean absolute error)をepoch毎にプロットする
     plot_history(history)

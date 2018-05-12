@@ -67,7 +67,7 @@ tree0 は１番目の推定器(estimator)、tree498 は500番目の推定器(estimator)を示す。
 
 ニューラルネットワークの構成は4層のFCで、フレームワークとしてはkerasとtensorflowを使用した。  
 ```
-python keras.py
+python keras-bh.py
 ```
 引数オプションとして、エポック数(-e )、ユニット数(-u )、バッチサイズ(-b )も指定できる。  
 
