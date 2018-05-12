@@ -91,7 +91,7 @@ if __name__ == '__main__':
     print("")
     # 予測誤差が大きいWorst 10を表示する
     index0= np.argsort( np.abs(test_targets - Y_predict))[::-1]
-    print ('Worst 10: estimation, actual, difference')
+    print ('Worst 10: actual, estimation, difference')
     for i in index0[0:10]:
         print(test_targets[i], "%.4f" % Y_predict[i], "%.4f" % (test_targets[i]- Y_predict[i]) )
     

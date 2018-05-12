@@ -116,7 +116,7 @@ print("")
 # 予測誤差が大きいWorst 10を表示する
 Y_predict= clf.predict(X_test)
 index0= np.argsort( np.abs(y_test - Y_predict))[::-1]
-print ('Worst 10: estimation, actual, difference')
+print ('Worst 10: actual, estimation, difference')
 for i in index0[0:10]:
     print(y_test[i], "%.4f" % Y_predict[i], "%.4f" % (y_test[i]- Y_predict[i]) )
 
