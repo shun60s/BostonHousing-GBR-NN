@@ -48,8 +48,8 @@ INDUS: 非小売業の土地面積の割合（人口単位）
 
 dotフォルダの中に以下がある。  
 
-- tree0.dot,tree498.dotなど　推定器(estimator)=決定木(decision tree)の構成を dotファイルとして書き出したサンプル  
-- tree0.png,tree498.pngなど　推定器(estimator)=決定木(decision tree)の構成を png（図形グラフ）に変換したサンプル  
+- [tree0.dot](./dot/tree0.dot),tree498.dotなど　推定器(estimator)=決定木(decision tree)の構成を dotファイルとして書き出したサンプル  
+- [tree0.png](./dot/tree0.png),tree498.pngなど　推定器(estimator)=決定木(decision tree)の構成を png（図形グラフ）に変換したサンプル  
 - dot2png.bat （別のソフトの）dot.exeを使ってdotファイルをpng（図形グラフ）に変換するためのwindows用のバッチファイル  
   
 
