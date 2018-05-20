@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ボストンハウスのデータを使った勾配ブースティング回帰  </title>
+<meta name="description" content="ボストンハウスのデータ(13種類の指標と住宅価格のデータ）の予測をおこなうscikit learnの事例を元に、" />
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-lg px-3 my-5 markdown-body">
+<h1>ボストンハウスのデータを使った勾配ブースティング回帰  </h1>
+
+<h2>概要  </h2>
+
+<p>ボストンハウスのデータ(13種類の指標と住宅価格のデータ）の予測をおこなうscikit learnの事例を元に、<br />
+各推定器=決定木の構成を知ることで勾配ブースティング回帰(Gradient Boosting regression)の動作を理解する。<br />
+また、ニューラルネットワークで予測した場合と比較する。</p>
+
+<p><a href="https://github.com/shun60s/BostonHousing-GBR-NN">github repository</a><br /></p>
+
+<h2> 勾配ブースティング回帰(Gradient Boosting regression)で住宅価格を予測した場合  </h2>
+<h3>動作方法  </h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+python GBR.py
+</code></pre></div></div>
+
+<h3>結果  </h3>
+
+<p>下図は、テストデータの予測誤差の平均(MAE)と、予測から大きく外れたワースト10のリスト、各指標の(相対的な）重要度である。
+<img src="GBR1.png" alt="sample1" ><br /></p>
+
+<p>誤差の平均値は小さくても、大きく外したケースも存在している。<br />
+また、ニューラルネットワークと違い、住宅価格を予測するために使った指標（入力）の（相対的な）重要度の情報も得られる。<br />
+住宅価格の単位は千ドルである。<br /></p>
+
+<p>ちなみに、相関関係を探るため、それぞれの指標と住宅価格の値をプロットすると以下のようになる。<br />
+LSTAT: 低所得者の割合<br />
+<img src="LSTAT.png" alt="sample2" ><br /></p>
+
+
+<p>RM: 1戸あたりの平均部屋数<br />
+<img src="RM.png" alt="sample3" ><br /></p>
+
+
+<p>DIS: ボストンの主な5つの雇用圏までの重み付き距離<br />
+<img src="DIS.png" alt="sample4" ><br /></p>
+
+
+<p>INDUS: 非小売業の土地面積の割合（人口単位）<br />
+<img src="INDUS.png" alt="sample5" ><br /></p>
+
+<p>ここまでくると相関はよくわからない。<br /></p>
+
+
+
+<h3>推定器(estimator)=決定木(decision tree)の構成  </h3>
+
+<p>dotフォルダの中に以下がある。<br /></p>
+
+<ul>
+<li><a href="../dot/tree0.dot">tree0.dot</a>,tree498.dotなど　推定器(estimator)=決定木(decision tree)の構成を dotファイルとして書き出したサンプル  </li>
+<li><a href="../dot/tree0.png">tree0.png</a>,tree498.pngなど　推定器(estimator)=決定木(decision tree)の構成を png（図形グラフ）に変換したサンプル  </li>
+<li>dot2png.bat （別のソフトの）dot.exeを使ってdotファイルをpng（図形グラフ）に変換するためのwindows用のバッチファイル  </li>
+</ul>
+
+
+<p>tree0 は１番目の推定器(estimator)、tree498 は500番目の推定器(estimator)を示す。<br />
+順番が上がっていくほど、端末の葉のvalue値は小さくなっていくようだ。<br />
+　　</p>
+
+
+<p>下図は、いろいろな手法による分類の境界線の例であるが、決定木(decision tree)はYes/No判定なので（曲線ではなく）離散的な境界となる。<br />
+<img src="border_line.png" alt="sample8" ><br /></p>
+
+
+<h2>ニューラルネットワークを使って住宅価格を予測した場合  </h2>
+
+<h3>動作方法  </h3>
+
+<p>ニューラルネットワークの構成は4層のFCで、フレームワークとしてはkerasとtensorflowを使用した。<br /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+python keras-bh.py
+</code></pre></div></div>
+<p>引数オプションとして、エポック数(-e )、ユニット数(-u )、バッチサイズ(-b )も指定できる。<br /></p>
+
+<p>下図は、学習時の損失(loss)と予測誤差の平均(mae)の様子である。<br />
+<img src="Figure_1_keras.png" alt="sample6" ><br /></p>
+
+
+<h3>結果  </h3>
+
+<p>下図は、テストデータの予測誤差の平均(MAE)と、予測から大きく外れたワースト10のリストである。
+<img src="keras1.png" alt="sample7" ><br /></p>
+
+<p>この例では、勾配ブースティング回帰の結果よりよい結果になっているが、
+ニューラルネットワークは初期値のとりかたによっても予測誤差は変わる。
+ニューラルネットワークの方が悪い結果を出すときもあるので、一概にどちらがよいとは言い切れない。<br /></p>
+
+
+<h2>ライセンス  </h2>
+
+<p>GBR.pyはそれに記載されているライセンスを参照してください。 <br /></p>
+
+
+<h2>参考にしたもの  </h2>
+
+<ul>
+<li><a href="http://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html#sphx-glr-auto-examples-ensemble-plot-gradient-boosting-regression-py">scikit-learn, Gradient Boosting regression example</a></li>
+<li><a href="http://liaoyuan.hatenablog.jp/entry/2018/02/03/004849">Deep Learning with Python】Boston Housing Datasetを用いた回帰問題</a></li>
+</ul>
+
+
+<h2>免責事項  </h2>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS 
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br /></p>
+<h4>上記はMITライセンスからの抜粋です。</h4>
+</div>
+</body>
+</html>
